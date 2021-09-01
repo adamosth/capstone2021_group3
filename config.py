@@ -1,13 +1,11 @@
 from __future__ import print_function
 from os import getenv
 
-NAME="ExampleExperiment"
-EXPT_UID="UniqueID"
-RESULTS_DIR="2020/ExampleExperiment/results"
+NAME="AdamCapstone2021_group3"
+EXPT_UID="9edf4167bf7174fe5db2d6872d670a1e"
+RESULTS_DIR="2021/AdamCapstone2021_group3/results"
 
-# Restrict device on AWS
 RESTRICTIONS = [] # ["IE", "mobile", "tablet", "tv"]
-
 
 # AWS Settings
 AWS_DEFAULT_REGION = 'us-west-2'
