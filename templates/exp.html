@@ -472,6 +472,44 @@ for (var b = 0; b < nBlocks; b++) {
   }
 }
 //timeline.push(finished);
+
+    var send_debrief = function(data){
+        if(_record_task_complete){
+            //window.location.href ="/debrief";
+            var form = document.createElement("form");
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', '/debrief');
+
+            var input = document.createElement('input');
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', 'data');
+            input.setAttribute('value', data);
+            form.appendChild(input);
+
+
+            input = document.createElement('input');
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', 'uid');
+            input.setAttribute('value', "{{uid}}");
+            form.appendChild(input);
+
+            if(_mturk){
+                input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'mturk');
+                input.setAttribute('value', _mturk);
+            }
+            
+            document.body.appendChild(form);
+            form.submit();
+
+        }else{
+            window.setTimeout(function(){
+                send_debrief(data);
+            }, 1000);
+        } 
+    };
+
 /* - - - - EXECUTION - - - - */
 
 jsPsych.init({
@@ -480,7 +518,7 @@ jsPsych.init({
     //jsPsych.data.get().ignore(['stimulus', 'internal_node_id', 'key_press', 'trial_type']).localSave('csv', 'testData.csv');
     var all_data = jsPsych.data.get().json();
     _send_task_data(all_data);
-    //send_debrief();
+    send_debrief();
   },
   default_iti: 250
 })
